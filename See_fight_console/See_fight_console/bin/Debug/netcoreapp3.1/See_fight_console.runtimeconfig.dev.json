@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\SashaMois\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\SashaMois\\.nuget\\packages"
+    ]
+  }
+}
