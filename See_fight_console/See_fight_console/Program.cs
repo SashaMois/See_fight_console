@@ -77,29 +77,6 @@ namespace See_fight_console
                                     int.TryParse(readed, out y);
                                     if (!(y >= 0 && y <= 9))
                                     {
-                                        if ((ship_length == 4 || ship_length == 3) && (ship_length - j == 1 || ship_length - j == 2))
-                                        {
-                                            bool a = (y < 0) ? true : false;
-
-                                            if (a)
-                                            {
-                                                ++y;
-                                                while (ground[x, y] == '+')
-                                                    ++y;
-                                                if (ship_length - 2 == j)
-                                                    ground[x, y++] = '+';
-                                            }
-                                            else
-                                            {
-                                                --y;
-                                                while (ground[x, y] == '+')
-                                                    --y;
-                                                if (ship_length - 2 == j)
-                                                    ground[x, y--] = '+';
-                                            }
-                                            j = ship_length;
-                                            break;
-                                        }
                                         Console.WriteLine("\nThis coordinate doesn't exist! Please, try again.");
                                         continue;
                                     }
@@ -112,16 +89,16 @@ namespace See_fight_console
                                 }
                             } while (true);
 
-                            if (j != 0 && j != ship_length)
+                            if (j != 0)
                                 if (last_y == y && j != 1)
                                 {
-                                    Console.WriteLine("\nInvalid coordinate! Please, try again.1");
+                                    Console.WriteLine("\nInvalid coordinate! Please, try again.");
                                     --j;
                                     continue;
                                 }
                                 else if (!(last_y - 1 == y || last_y + 1 == y) && j != 1)
                                 {
-                                    Console.WriteLine("\nInvalid coordinate! Please, try again.2");
+                                    Console.WriteLine("\nInvalid coordinate! Please, try again.");
                                     --j;
                                     continue;
                                 }
