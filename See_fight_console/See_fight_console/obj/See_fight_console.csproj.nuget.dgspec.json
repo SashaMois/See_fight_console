@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\SashaMois\\source\\repos\\C#\\See_fight_console\\See_fight_console\\See_fight_console.csproj": {}
+    "C:\\GitHub\\Repositories\\C#\\See_fight_console\\See_fight_console\\See_fight_console\\See_fight_console.csproj": {}
   },
   "projects": {
-    "C:\\Users\\SashaMois\\source\\repos\\C#\\See_fight_console\\See_fight_console\\See_fight_console.csproj": {
+    "C:\\GitHub\\Repositories\\C#\\See_fight_console\\See_fight_console\\See_fight_console\\See_fight_console.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\SashaMois\\source\\repos\\C#\\See_fight_console\\See_fight_console\\See_fight_console.csproj",
+        "projectUniqueName": "C:\\GitHub\\Repositories\\C#\\See_fight_console\\See_fight_console\\See_fight_console\\See_fight_console.csproj",
         "projectName": "See_fight_console",
-        "projectPath": "C:\\Users\\SashaMois\\source\\repos\\C#\\See_fight_console\\See_fight_console\\See_fight_console.csproj",
+        "projectPath": "C:\\GitHub\\Repositories\\C#\\See_fight_console\\See_fight_console\\See_fight_console\\See_fight_console.csproj",
         "packagesPath": "C:\\Users\\SashaMois\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\SashaMois\\source\\repos\\C#\\See_fight_console\\See_fight_console\\obj\\",
+        "outputPath": "C:\\GitHub\\Repositories\\C#\\See_fight_console\\See_fight_console\\See_fight_console\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\SashaMois\\AppData\\Roaming\\NuGet\\NuGet.Config",

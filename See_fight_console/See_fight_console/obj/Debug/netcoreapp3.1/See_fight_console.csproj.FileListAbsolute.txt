@@ -9,3 +9,14 @@ C:\Users\SashaMois\source\repos\See_fight_console\See_fight_console\obj\Debug\ne
 C:\Users\SashaMois\source\repos\See_fight_console\See_fight_console\obj\Debug\netcoreapp3.1\See_fight_console.AssemblyInfo.cs
 C:\Users\SashaMois\source\repos\See_fight_console\See_fight_console\obj\Debug\netcoreapp3.1\See_fight_console.dll
 C:\Users\SashaMois\source\repos\See_fight_console\See_fight_console\obj\Debug\netcoreapp3.1\See_fight_console.pdb
+C:\GitHub\Repositories\C#\See_fight_console\See_fight_console\See_fight_console\bin\Debug\netcoreapp3.1\See_fight_console.exe
+C:\GitHub\Repositories\C#\See_fight_console\See_fight_console\See_fight_console\bin\Debug\netcoreapp3.1\See_fight_console.deps.json
+C:\GitHub\Repositories\C#\See_fight_console\See_fight_console\See_fight_console\bin\Debug\netcoreapp3.1\See_fight_console.runtimeconfig.json
+C:\GitHub\Repositories\C#\See_fight_console\See_fight_console\See_fight_console\bin\Debug\netcoreapp3.1\See_fight_console.runtimeconfig.dev.json
+C:\GitHub\Repositories\C#\See_fight_console\See_fight_console\See_fight_console\bin\Debug\netcoreapp3.1\See_fight_console.dll
+C:\GitHub\Repositories\C#\See_fight_console\See_fight_console\See_fight_console\bin\Debug\netcoreapp3.1\See_fight_console.pdb
+C:\GitHub\Repositories\C#\See_fight_console\See_fight_console\See_fight_console\obj\Debug\netcoreapp3.1\See_fight_console.csprojAssemblyReference.cache
+C:\GitHub\Repositories\C#\See_fight_console\See_fight_console\See_fight_console\obj\Debug\netcoreapp3.1\See_fight_console.AssemblyInfoInputs.cache
+C:\GitHub\Repositories\C#\See_fight_console\See_fight_console\See_fight_console\obj\Debug\netcoreapp3.1\See_fight_console.AssemblyInfo.cs
+C:\GitHub\Repositories\C#\See_fight_console\See_fight_console\See_fight_console\obj\Debug\netcoreapp3.1\See_fight_console.dll
+C:\GitHub\Repositories\C#\See_fight_console\See_fight_console\See_fight_console\obj\Debug\netcoreapp3.1\See_fight_console.pdb
