@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace See_fight_console
 {
@@ -55,8 +56,8 @@ namespace See_fight_console
                     bool isAskY = true;
 
                     // for check truth of next value of x or y
-                    int last_x = 0;
-                    int last_y = 0;
+                    int[] last_x = Enumerable.Repeat(10, ship_length).ToArray();
+                    int[] last_y = Enumerable.Repeat(10, ship_length).ToArray();
 
                     int checkIsAsk = 0;
 
@@ -65,6 +66,7 @@ namespace See_fight_console
                     else if (ship_length == 1) Console.WriteLine($"Write coordinates for next {i + 1} Torpedo Boat(one deck ship):");
                     for (int j = 0; j < ship_length; ++j)
                     {
+                        AgainY:
                         // initialize y
                         if (isAskY)
                         {
@@ -89,21 +91,35 @@ namespace See_fight_console
                                 }
                             } while (true);
 
-                            if (j != 0)
-                                if (last_y == y && j != 1)
+                            if (j != 0 && !(j == 1 && last_y[j - 1] == y))
+                            {
+                                int k = 0;
+                                for (k = 0; k < last_y.Length; ++k)
                                 {
-                                    Console.WriteLine("\nInvalid coordinate! Please, try again.");
-                                    --j;
-                                    continue;
-                                }
-                                else if (!(last_y - 1 == y || last_y + 1 == y) && j != 1)
-                                {
-                                    Console.WriteLine("\nInvalid coordinate! Please, try again.");
-                                    --j;
-                                    continue;
-                                }
+                                    if (last_y[k] == 10)
+                                        continue;
 
-                            last_y = y;
+                                    if (last_y[k] == y)
+                                    {
+                                        Console.WriteLine("\nThis coordinate already has one of the parts of the ship!\nPlease, try again.");
+                                        goto AgainY;
+                                    }
+                                }
+                                for (k = 0; k < last_y.Length; ++k)
+                                {
+                                    if (last_y[k] == 10)
+                                        continue;
+
+                                    if (y - 1 == last_y[k] || y + 1 == last_y[k])
+                                        break;
+                                }
+                                if (k == last_y.Length)
+                                {
+                                    Console.WriteLine("Your input is wrong! Please, try again.");
+                                    goto AgainY;
+                                }
+                            }
+                            last_y[j] = y;
                         }
 
                         // check whether it makes sense to ask the value of one of the variables
@@ -114,6 +130,7 @@ namespace See_fight_console
                             else if (j == 1 && checkIsAsk != y) isAskX = false;
                         }
 
+                        AgainX:
                         // initialize x
                         if (isAskX)
                         {
@@ -138,14 +155,36 @@ namespace See_fight_console
                                 }
                             } while (true);
 
-                            if (!(last_x - 1 == x || last_x + 1 == x) && j != 0)
+                            if (j != 0)
                             {
-                                Console.WriteLine("\nInvalid coordinate! Please, try again.");
-                                --j;
-                                continue;
+                                int k = 0;
+                                for (k = 0; k < last_x.Length; ++k)
+                                {
+                                    if (last_x[k] == 10)
+                                        continue;
+
+                                    if (last_x[k] == x)
+                                    {
+                                        Console.WriteLine("\nThis coordinate already has one of the parts of the ship!\nPlease, try again.");
+                                        goto AgainY;
+                                    }
+                                }
+                                for (k = 0; k < last_x.Length; ++k)
+                                {
+                                    if (last_x[k] == 10)
+                                        continue;
+
+                                    if (x - 1 == last_x[k] || x + 1 == last_x[k])
+                                        break;
+                                }
+                                if (k == last_x.Length)
+                                {
+                                    Console.WriteLine("Your input is wrong! Please, try again.");
+                                    goto AgainX;
+                                }
                             }
 
-                            last_x = x;
+                            last_x[j] = x;
                         }
 
                         ground[x, y] = '+';
