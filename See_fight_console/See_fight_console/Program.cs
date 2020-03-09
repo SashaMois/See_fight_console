@@ -5,6 +5,14 @@ namespace See_fight_console
 {
     class Program
     {
+        static void DeleteCoordinate
+        (
+            int x, int y, ref char[,] ground
+        )
+        {
+            ground[x, y] = '\0';
+            Console.WriteLine("\nCoordinate {1};{0} succesfully delete!", x, y);
+        }
 
         static void WriteGround(char[,] ground)
         {
@@ -37,8 +45,8 @@ namespace See_fight_console
             uint ship_count = 1;
 
             // coordinates
-            int x = 0;
-            int y = 0;
+            int x = -1;
+            int y = -1;
 
             // arrangement
             while (ship_count <= 4)
@@ -64,6 +72,7 @@ namespace See_fight_console
                     if (ship_length == 3) Console.WriteLine($"Write coordinates for next {i + 1} Cruiser(three deck) ship:");
                     else if (ship_length == 2) Console.WriteLine($"Write coordinates for next {i + 1} Destroyer(two deck) ship:");
                     else if (ship_length == 1) Console.WriteLine($"Write coordinates for next {i + 1} Torpedo Boat(one deck ship):");
+                    StartOver:
                     for (int j = 0; j < ship_length; ++j)
                     {
                         AgainY:
@@ -76,7 +85,26 @@ namespace See_fight_console
                                 {
                                     Console.Write("Coordinate y: ");
                                     string readed = Console.ReadLine();
-                                    int.TryParse(readed, out y);
+                                    if (readed == "delete coordinate")
+                                    {
+                                        if (j == 0)
+                                        {
+                                            Console.WriteLine("\nYou can't delete coordinate because it doesn't exist!");
+                                            continue;
+                                        }
+                                        DeleteCoordinate(last_x[--j], last_y[j], ref ground);
+                                        last_x[j] = 10;
+                                        last_y[j] = 10;
+                                        if (j == 0)
+                                        {
+                                            isAskX = true;
+                                            x = -1;
+                                            y = -1;
+                                            goto StartOver;
+                                        }
+                                        continue;
+                                    }
+                                    y = int.Parse(readed);
                                     if (!(y >= 0 && y <= 9))
                                     {
                                         Console.WriteLine("\nThis coordinate doesn't exist! Please, try again.");
@@ -115,12 +143,12 @@ namespace See_fight_console
                                 }
                                 if (k == last_y.Length)
                                 {
-                                    Console.WriteLine("Your input is wrong! Please, try again.");
+                                    Console.WriteLine("\nYour input is wrong! Please, try again.");
                                     goto AgainY;
                                 }
                             }
-                            last_y[j] = y;
                         }
+                        last_y[j] = y;
 
                         // check whether it makes sense to ask the value of one of the variables
                         {
@@ -140,7 +168,7 @@ namespace See_fight_console
                                 {
                                     Console.Write("Coordinate x: ");
                                     string readed = Console.ReadLine();
-                                    int.TryParse(readed, out x);
+                                    x = int.Parse(readed);                       
                                     if (!(x >= 0 && x <= 9))
                                     {
                                         Console.WriteLine("\nThis coordinate doesn't exist! Please, try again.");
@@ -166,7 +194,7 @@ namespace See_fight_console
                                     if (last_x[k] == x)
                                     {
                                         Console.WriteLine("\nThis coordinate already has one of the parts of the ship!\nPlease, try again.");
-                                        goto AgainY;
+                                        goto AgainX;
                                     }
                                 }
                                 for (k = 0; k < last_x.Length; ++k)
@@ -179,13 +207,12 @@ namespace See_fight_console
                                 }
                                 if (k == last_x.Length)
                                 {
-                                    Console.WriteLine("Your input is wrong! Please, try again.");
+                                    Console.WriteLine("\nYour input is wrong! Please, try again.");
                                     goto AgainX;
                                 }
                             }
-
-                            last_x[j] = x;
                         }
+                        last_x[j] = x;
 
                         ground[x, y] = '+';
                     }
