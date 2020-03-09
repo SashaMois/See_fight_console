@@ -7,7 +7,9 @@ namespace See_fight_console
     {
         static void DeleteCoordinate
         (
-            int x, int y, ref char[,] ground
+            int x, 
+            int y, 
+            ref char[,] ground
         )
         {
             ground[x, y] = '\0';
@@ -168,7 +170,34 @@ namespace See_fight_console
                                 {
                                     Console.Write("Coordinate x: ");
                                     string readed = Console.ReadLine();
-                                    x = int.Parse(readed);                       
+                                    if (readed == "delete coordinate")
+                                    { 
+                                        if (j == 0)
+                                        {
+                                            Console.WriteLine("\nYou can't delete coordinate because it doesn't exist!");
+                                            continue;
+                                        }
+
+                                        last_y[j] = 10;
+                                        DeleteCoordinate(last_x[--j], last_y[j], ref ground);
+                                        last_x[j] = 10;
+                                        last_y[j] = 10;
+
+                                        if (j == 0)
+                                        {
+                                            isAskY = true;
+                                            x = -1;
+                                            y = -1;
+                                            goto StartOver;
+                                        }
+                                        else if (j == 1)
+                                        {
+                                            isAskY = true;
+                                            x = last_x[j - 1];
+                                        }
+                                        goto AgainY;
+                                    }
+                                    x = int.Parse(readed);
                                     if (!(x >= 0 && x <= 9))
                                     {
                                         Console.WriteLine("\nThis coordinate doesn't exist! Please, try again.");
