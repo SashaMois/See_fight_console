@@ -223,6 +223,12 @@ namespace See_fight_console
                                     if (last_x[k] == x)
                                     {
                                         Console.WriteLine("\nThis coordinate already has one of the parts of the ship!\nPlease, try again.");
+                                        if (j == 1)
+                                        {
+                                            isAskY = true;
+                                            last_y[j] = 10;
+                                            goto AgainY;
+                                        }
                                         goto AgainX;
                                     }
                                 }
