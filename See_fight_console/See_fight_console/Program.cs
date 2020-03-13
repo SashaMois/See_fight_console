@@ -19,17 +19,17 @@ namespace See_fight_console
         static void WriteGround(char[,] ground)
         {
             Console.Write("     ");
-            for (int i = 0; i < ground.GetLength(0); ++i)
-                Console.Write(i + ". ");
+            for (int i = 1; i < ground.GetLength(0) - 1; ++i)
+                Console.Write(i - 1 + ". ");
             Console.Write('y');
             Console.WriteLine('\n');
 
-            for (int i = 0; i < ground.GetLength(0); ++i)
+            for (int i = 1; i < ground.GetLength(0) - 1; ++i)
             {
-                Console.Write($"{i}.   ");
-                for (int j = 0; j < ground.GetLength(1); ++j)
+                Console.Write($"{i - 1}.   ");
+                for (int j = 1; j < ground.GetLength(1) - 1; ++j)
                     if (ground[i, j] == '\0')
-                        Console.Write(Convert.ToInt32((ground[i, j])) + "  ");
+                        Console.Write(Convert.ToInt32(ground[i, j]) + "  ");
                     else
                         Console.Write(ground[i, j] + "  ");
                 Console.WriteLine();
@@ -69,6 +69,8 @@ namespace See_fight_console
                     int[] last_x = Enumerable.Repeat(10, ship_length).ToArray();
                     int[] last_y = Enumerable.Repeat(10, ship_length).ToArray();
 
+                    char[,] intermediate_rez = new char[10, 10];
+
                     int checkIsAsk = 0;
 
                     if (ship_length == 3) Console.WriteLine($"Write coordinates for next {i + 1} Cruiser(three deck) ship:");
@@ -77,7 +79,7 @@ namespace See_fight_console
                     StartOver:
                     for (int j = 0; j < ship_length; ++j)
                     {
-                        AgainY:
+                    AgainY:
                         // initialize y
                         if (isAskY)
                         {
@@ -94,14 +96,12 @@ namespace See_fight_console
                                             Console.WriteLine("\nYou can't delete coordinate because it doesn't exist!");
                                             continue;
                                         }
-                                        DeleteCoordinate(last_x[--j], last_y[j], ref ground);
+                                        DeleteCoordinate(last_x[--j], last_y[j], ref intermediate_rez);
                                         last_x[j] = 10;
                                         last_y[j] = 10;
                                         if (j == 0)
                                         {
                                             isAskX = true;
-                                            x = -1;
-                                            y = -1;
                                             goto StartOver;
                                         }
                                         continue;
@@ -160,7 +160,7 @@ namespace See_fight_console
                             else if (j == 1 && checkIsAsk != y) isAskX = false;
                         }
 
-                        AgainX:
+                    AgainX:
                         // initialize x
                         if (isAskX)
                         {
@@ -171,7 +171,7 @@ namespace See_fight_console
                                     Console.Write("Coordinate x: ");
                                     string readed = Console.ReadLine();
                                     if (readed == "delete coordinate")
-                                    { 
+                                    {
                                         if (j == 0)
                                         {
                                             Console.WriteLine("\nYou can't delete coordinate because it doesn't exist!");
@@ -179,15 +179,13 @@ namespace See_fight_console
                                         }
 
                                         last_y[j] = 10;
-                                        DeleteCoordinate(last_x[--j], last_y[j], ref ground);
+                                        DeleteCoordinate(last_x[--j], last_y[j], ref intermediate_rez);
                                         last_x[j] = 10;
                                         last_y[j] = 10;
 
                                         if (j == 0)
                                         {
                                             isAskY = true;
-                                            x = -1;
-                                            y = -1;
                                             goto StartOver;
                                         }
                                         else if (j == 1)
@@ -249,8 +247,42 @@ namespace See_fight_console
                         }
                         last_x[j] = x;
 
-                        ground[x, y] = '+';
+                        intermediate_rez[x, y] = '+';
+                        if (
+                            intermediate_rez[x, y] == ground[x + 1, y + 1] ||
+                            intermediate_rez[x, y] == ground[x, y] || intermediate_rez[x, y] == ground[x + 2, y + 2] ||
+                            intermediate_rez[x, y] == ground[x, y + 2] || intermediate_rez[x, y] == ground[x + 2, y] ||
+                            intermediate_rez[x, y] == ground[x, y + 1] || intermediate_rez[x, y] == ground[x + 2, y + 1] ||
+                            intermediate_rez[x, y] == ground[x + 1, y] || intermediate_rez[x, y] == ground[x + 1, y + 2] 
+                           )
+                        {
+                            Console.WriteLine("\nMinimum distance not observed between ships!\nPlease, try again.");
+                            intermediate_rez[x, y] = '\0';
+                            last_x[j] = 10;
+                            last_y[j] = 10;
+                            if (j == 0)
+                            {
+                                isAskX = true;
+                                isAskY = true;
+                                goto StartOver;
+                            }
+
+                            if (j == 1)
+                            {
+                                isAskX = true;
+                                isAskY = true;
+                            }
+                            goto AgainY;
+                        }                   
                     }
+                    for (int k = 0; k < intermediate_rez.GetLength(0); ++k)
+                        for (int j = 0; j < intermediate_rez.GetLength(1); ++j)
+                            if (intermediate_rez[k, j] != 0)
+                            {
+                                ground[k + 1, j + 1] = intermediate_rez[k, j];
+                                intermediate_rez[k, j] = '\0';
+                            }
+
                     Console.WriteLine();
                     WriteGround(ground);
                 }
@@ -264,8 +296,8 @@ namespace See_fight_console
         {
             string player1_name;
             string player2_name;
-            char[,] ground1 = new char[10, 10];
-            char[,] ground2 = new char[10, 10];
+            char[,] ground1 = new char[12, 12];
+            char[,] ground2 = new char[12, 12];
 
             // greeting and initializing names
             {
